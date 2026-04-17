@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Zdeněk Němec — Software Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Background effects -->
+  <div class="bg-mesh"></div>
+  <div class="bg-grid"></div>
+  <div class="bg-fx"><canvas id="stars"></canvas></div>
+
+  <!-- Cursor -->
+  <div class="cursor-ring" id="cursorRing"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#top" class="logo" data-hover>
+        <span class="glyph">ZN</span>
+        <span>zdenek.dev</span>
+      </a>
+      <div class="nav-links">
+        <a href="#about" data-hover>// about</a>
+        <a href="#skills" data-hover>// stack</a>
+        <a href="#work" data-hover>// work</a>
+        <a href="#services" data-hover>// services</a>
+        <a href="#experience" data-hover>// experience</a>
+        <a href="#contact" data-hover>// contact</a>
+      </div>
+      <div class="nav-meta">
+        <span class="status-dot"></span>
+        <span id="availability">AVAILABLE Q2 '26</span>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero container">
+      <div class="hero-top">
+        <span><i class="status-dot"></i> ONLINE · PRAGUE, CZ · UTC+1</span>
+        <span id="clock">—</span>
+      </div>
+      <h1>
+        Building <span class="accent">fast</span>,<br />
+        thoughtful <span class="strike">websites</span> <span>software</span><br />
+        for the modern web.
+      </h1>
+      <div class="hero-sub">
+        <div>
+          <p>
+            <strong>Zdeněk Němec</strong> — software developer focused on web apps, marketing sites &amp; e-commerce. I ship production-grade systems end-to-end, from database schema to the last pixel.
+          </p>
+          <div class="cta-row">
+            <a href="#work" class="btn btn-primary" data-hover>View portfolio <span class="arrow">→</span></a>
+            <a href="#contact" class="btn" data-hover>Start a project</a>
+          </div>
+        </div>
+        <div class="terminal" data-hover>
+          <div class="terminal-bar">
+            <div class="dots"><i></i><i></i><i></i></div>
+            <span class="title">~/zdenek/whoami.sh</span>
+          </div>
+          <div class="terminal-body" id="termBody"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="container">
+      <div class="section-head reveal">
+        <span class="tag">// 01 — about</span>
+        <h2>Ten years of<br />shipping the web.</h2>
+        <div class="trail"></div>
+      </div>
+      <div class="about-grid">
+        <div class="reveal">
+          <p class="about-lead">
+            I design and build the <em>full stack</em> — from Next.js frontends and Shopify storefronts to Node &amp; Laravel APIs and database schemas that actually scale.
+          </p>
+          <div class="about-body">
+            <p>Self-taught, detail-obsessed, and pragmatic. I care about performance budgets, accessibility defaults, and shipping features that survive the first real week of traffic. No framework churn, no buzzword soup — just the right tool per problem.</p>
+            <p>I've built everything from small landing pages to multi-tenant SaaS dashboards and e-commerce platforms moving real money. I work with founders, agencies, and in-house teams as a solo contractor or embedded engineer.</p>
+          </div>
+        </div>
+        <div class="stats reveal delay-1">
+          <div class="stat">
+            <div class="k">Years shipping</div>
+            <div class="v">10<span class="unit">+</span></div>
+            <div class="meta">since 2016</div>
+          </div>
+          <div class="stat">
+            <div class="k">Projects delivered</div>
+            <div class="v">120<span class="unit">+</span></div>
+            <div class="meta">commercial &amp; internal</div>
+          </div>
+          <div class="stat">
+            <div class="k">Production stacks</div>
+            <div class="v">18</div>
+            <div class="meta">languages + frameworks</div>
+          </div>
+          <div class="stat">
+            <div class="k">Uptime, flagship</div>
+            <div class="v">99.98<span class="unit">%</span></div>
+            <div class="meta">rolling 12mo</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="container">
+      <div class="section-head reveal">
+        <span class="tag">// 02 — stack</span>
+        <h2>Tooling,<br />categorized.</h2>
+        <div class="trail"></div>
+      </div>
+      <div class="skills-wrap reveal" id="skillsWrap"></div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="work" class="container">
+      <div class="section-head reveal">
+        <span class="tag">// 03 — selected work</span>
+        <h2>Recent<br />projects.</h2>
+        <div class="trail"></div>
+      </div>
+      <div class="portfolio-grid" id="portfolio"></div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="container">
+      <div class="section-head reveal">
+        <span class="tag">// 04 — services</span>
+        <h2>How I<br />can help.</h2>
+        <div class="trail"></div>
+      </div>
+      <div class="services reveal">
+        <div class="service">
+          <div class="num">/ 01</div>
+          <h3>Web applications</h3>
+          <p>Full-stack SaaS, dashboards, internal tools. Auth, billing, realtime, background jobs — wired end-to-end.</p>
+          <ul>
+            <li>Next.js / React / TypeScript</li>
+            <li>Node, Supabase, Postgres</li>
+            <li>Stripe, Resend, queues</li>
+          </ul>
+        </div>
+        <div class="service">
+          <div class="num">/ 02</div>
+          <h3>Marketing sites</h3>
+          <p>Fast, CMS-driven sites that score 100 on Lighthouse and actually convert. SEO done properly.</p>
+          <ul>
+            <li>Astro, Next.js, Svelte</li>
+            <li>Headless CMS integration</li>
+            <li>Motion + interaction design</li>
+          </ul>
+        </div>
+        <div class="service">
+          <div class="num">/ 03</div>
+          <h3>E-commerce</h3>
+          <p>Shopify Plus storefronts, custom checkouts, or from-scratch e-shops with payment + fulfilment integrations.</p>
+          <ul>
+            <li>Shopify / Hydrogen</li>
+            <li>Custom Laravel / Next commerce</li>
+            <li>Stripe, GoPay, fulfilment APIs</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="container">
+      <div class="section-head reveal">
+        <span class="tag">// 05 — experience</span>
+        <h2>Work<br />history.</h2>
+        <div class="trail"></div>
+      </div>
+      <div id="timeline" class="reveal"></div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="container">
+      <div class="section-head reveal">
+        <span class="tag">// 06 — contact</span>
+        <h2>Let's build<br />something.</h2>
+        <div class="trail"></div>
+      </div>
+      <div class="contact-grid">
+        <div class="reveal">
+          <p class="contact-lead">
+            Have a project in mind? I'm currently taking on <em>new engagements</em> for Q2–Q3 2026. Short consults, fixed-scope builds, or embedded retainers.
+          </p>
+          <div class="contact-meta">
+            <div class="row"><span class="k">Email</span><span class="v"><a href="mailto:hello@zdenek.dev" data-hover>hello@zdenek.dev</a></span></div>
+            <div class="row"><span class="k">GitHub</span><span class="v"><a href="#" data-hover>github.com/zdeneknemec</a></span></div>
+            <div class="row"><span class="k">LinkedIn</span><span class="v"><a href="#" data-hover>in/zdenek-nemec</a></span></div>
+            <div class="row"><span class="k">Based in</span><span class="v">Prague, Czech Republic</span></div>
+            <div class="row"><span class="k">Working</span><span class="v">Remote · EU / US hours</span></div>
+          </div>
+        </div>
+        <form class="form reveal delay-1" id="contactForm" data-hover>
+          <div class="form-row">
+            <div>
+              <label>Name</label>
+              <input type="text" name="name" placeholder="your name" required />
+            </div>
+            <div>
+              <label>Email</label>
+              <input type="email" name="email" placeholder="you@domain.com" required />
+            </div>
+          </div>
+          <div>
+            <label>Project type</label>
+            <select name="type">
+              <option>Web application</option>
+              <option>Marketing site</option>
+              <option>E-commerce</option>
+              <option>Something else</option>
+            </select>
+          </div>
+          <div>
+            <label>Brief</label>
+            <textarea name="msg" placeholder="a few lines about scope, timeline, stack..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="justify-content:center" data-hover>Transmit <span class="arrow">→</span></button>
+          <div class="sent">// message transmitted — I'll reply within 24h.</div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© 2026 Zdeněk Němec · Crafted with care in Prague · <span id="build">build 2026.04.17</span></div>
+      <div class="footer-socials">
+        <a href="#" data-hover>GitHub</a>
+        <a href="#" data-hover>LinkedIn</a>
+        <a href="#" data-hover>Email</a>
+        <a href="#" data-hover>RSS</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Tweaks panel -->
+  <div class="tweaks" id="tweaks">
+    <h4>// Tweaks <span style="color:var(--fg-meta)">v1</span></h4>
+    <div class="tweak-row">
+      <label>Theme</label>
+      <div class="tweak-toggle" data-group="theme">
+        <button data-value="dark">Dark</button>
+        <button data-value="light">Light</button>
+      </div>
+    </div>
+    <div class="tweak-row">
+      <label>Background FX</label>
+      <div class="tweak-toggle" data-group="fx">
+        <button data-value="on">On</button>
+        <button data-value="off">Off</button>
+      </div>
+    </div>
+    <div class="tweak-row">
+      <label>Accent</label>
+      <div class="swatches" id="swatches"></div>
+    </div>
+  </div>
+
+  <script>
+    /*EDITMODE-BEGIN*/
+    const TWEAK_DEFAULTS = {
+      "theme": "dark",
+      "fx": "on",
+      "accent": "cyan"
+    };
+    /*EDITMODE-END*/
+  </script>
+  <script src="site.js"></script>
+</body>
+</html>
