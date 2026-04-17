@@ -249,9 +249,18 @@
     </div>
   </footer>
 
+  <!-- Tweaks trigger -->
+  <button class="tweaks-trigger" id="tweaksTrigger" data-hover aria-label="Open tweaks panel">
+    <span class="tw-icon">⚙</span>
+    <span class="tw-label">TWEAKS</span>
+  </button>
+
   <!-- Tweaks panel -->
   <div class="tweaks" id="tweaks">
-    <h4>// Tweaks <span style="color:var(--fg-meta)">v1</span></h4>
+    <h4>
+      <span>// Tweaks <span style="color:var(--fg-meta)">v1</span></span>
+      <button class="tweaks-close" id="tweaksClose" data-hover aria-label="Close">×</button>
+    </h4>
     <div class="tweak-row">
       <label>Theme</label>
       <div class="tweak-toggle" data-group="theme">

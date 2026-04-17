@@ -539,12 +539,40 @@ buildSwatches();
 syncToggles();
 wireToggles();
 
-/* ---------- Edit-mode protocol ---------- */
+/* ---------- Tweaks panel toggle ---------- */
 const tweaksEl = document.getElementById("tweaks");
+const tweaksTrigger = document.getElementById("tweaksTrigger");
+const tweaksClose = document.getElementById("tweaksClose");
+
+function openTweaks() {
+  tweaksEl.classList.add("open");
+  tweaksTrigger.classList.add("hidden");
+}
+function closeTweaks() {
+  tweaksEl.classList.remove("open");
+  tweaksTrigger.classList.remove("hidden");
+}
+
+tweaksTrigger?.addEventListener("click", openTweaks);
+tweaksClose?.addEventListener("click", closeTweaks);
+
+// Zavřít při kliknutí mimo panel
+document.addEventListener("click", (e) => {
+  if (!tweaksEl.classList.contains("open")) return;
+  if (tweaksEl.contains(e.target) || tweaksTrigger.contains(e.target)) return;
+  closeTweaks();
+});
+
+// Zavřít na Escape
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && tweaksEl.classList.contains("open")) closeTweaks();
+});
+
+// Podpora Claude Design edit-mode protokolu
 window.addEventListener("message", (e) => {
   const d = e.data || {};
-  if (d.type === "__activate_edit_mode") tweaksEl.classList.add("open");
-  if (d.type === "__deactivate_edit_mode") tweaksEl.classList.remove("open");
+  if (d.type === "__activate_edit_mode") openTweaks();
+  if (d.type === "__deactivate_edit_mode") closeTweaks();
 });
 try {
   window.parent.postMessage({ type: "__edit_mode_available" }, "*");
