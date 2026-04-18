@@ -462,6 +462,7 @@ section { padding: 120px 0; position: relative; }
 }
 
 .project:hover { border-color: var(--accent); }
+@media (pointer: coarse) { .project.clickable { cursor: pointer; } }
 
 .proj-vis {
   aspect-ratio: 16 / 10;

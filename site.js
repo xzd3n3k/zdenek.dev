@@ -278,6 +278,7 @@ const projects = [
     type: "business website",
     year: "2026",
     wide: true,
+    url: "https://www.nbeautycare.cz/",
     desc: "Info website for a beauty salon in OC Rozkvět, Brno. Next.js 16 App Router with Tailwind v4, 55 services across 9 categories, Framer Motion animations, and direct integration with the Reservio booking system.",
     stack: ["Next.js 16", "React 19", "TypeScript", "Tailwind v4", "Framer Motion", "Vercel"],
     visual: "site",
@@ -286,6 +287,7 @@ const projects = [
     title: "PurityX",
     type: "e-shop",
     year: "2026",
+    url: "https://its-time-shop.vercel.app",
     desc: "Custom Czech e-shop for an automotive cosmetics brand. Cart drawer, checkout with bank-transfer payments (SPD QR codes), order tracking page, and Resend-powered transactional emails — built end-to-end solo.",
     stack: ["Next.js 16", "TypeScript", "Supabase", "Zustand", "Tailwind", "Resend"],
     visual: "shop",
@@ -302,6 +304,7 @@ const projects = [
     title: "It's Time",
     type: "business website",
     year: "2025",
+    url: "https://itstime.cz/",
     desc: "Professional presentation website for an auto detailing studio. Features a service showcase, project gallery, and an integrated booking form.",
     stack: ["Svelte", "Python", "TypeScript", "Tailwind"],
     visual: "site",
@@ -317,7 +320,8 @@ const projects = [
   {
     title: "Colorly",
     type: "design tool",
-    year: "2024",
+    year: "2025",
+    url: "https://colorly.cloud/",
     desc: "React web app that generates primary, secondary, and semantic color palettes with perceptual-lightness correction — built for designers and devs maintaining consistent design systems.",
     stack: ["React", "TypeScript", "Tailwind", "CRA"],
     visual: "editor",
@@ -325,7 +329,7 @@ const projects = [
   {
     title: "HTML Price Converter",
     type: "desktop utility",
-    year: "2022",
+    year: "2023",
     desc: "Java desktop GUI that parses uploaded HTML files and automatically converts Czech crown prices to EUR. Built to streamline localization for multi-currency online stores.",
     stack: ["Java", "Swing", "JSoup"],
     visual: "api",
@@ -333,7 +337,7 @@ const projects = [
   {
     title: "Twitch Bot",
     type: "bot",
-    year: "2021",
+    year: "2022",
     desc: "Self-hosted Twitch bot that monitors stream status to automatically join live channels. It simulates viewer engagement with randomized chat messages and emojis, disconnecting once the stream ends.",
     stack: ["Typescript", "Twitch IRC", "WebSockets", "@twurple", "pino", "twitch-js", "worker-threads"],
     visual: "api",
@@ -433,7 +437,7 @@ function projVisual(kind) {
 function renderPortfolio() {
   const wrap = document.getElementById("portfolio");
   wrap.innerHTML = projects.map((p, i) => `
-    <article class="project reveal ${p.wide ? "wide" : ""} ${i%2 === 1 ? "delay-1" : ""}" data-hover>
+    <article class="project reveal ${p.wide ? "wide" : ""} ${p.url ? "clickable" : ""} ${i%2 === 1 ? "delay-1" : ""}" ${p.url ? `data-url="${p.url}"` : ""} data-hover>
       <div class="proj-vis">
         <div class="proj-chrome"><span class="d"></span><span class="d"></span><span class="d"></span><span>// ${p.title.toLowerCase().replace(/\s+/g,"_")}</span></div>
         ${projVisual(p.visual)}
@@ -443,15 +447,19 @@ function renderPortfolio() {
           <span class="type">${p.type}</span>
           <span class="dot"></span>
           <span>${p.year}</span>
-          <span class="dot"></span>
-          <span>case study</span>
+          ${p.url ? `<span class="dot"></span><span>view project</span>` : ""}
         </div>
-        <div class="proj-title">${p.title} <span class="ext">↗</span></div>
+        <div class="proj-title">${p.title}${p.url ? ` <span class="ext">↗</span>` : ""}</div>
         <p class="proj-desc">${p.desc}</p>
         <div class="proj-stack">${p.stack.map(s => `<span>${s}</span>`).join("")}</div>
       </div>
     </article>
   `).join("");
+  wrap.addEventListener("click", (e) => {
+    const card = e.target.closest(".project.clickable[data-url]");
+    if (!card) return;
+    window.open(card.dataset.url, "_blank", "noopener,noreferrer");
+  });
   attachTilt();
   attachReveal();
 }
