@@ -276,7 +276,13 @@ section { padding: 120px 0; position: relative; }
   line-height: 1.8;
   min-height: 180px;
 }
-.term-line { display: flex; gap: 8px; white-space: pre-wrap; word-break: break-word; }
+.term-line {
+  display: block;
+  white-space: pre-wrap;
+  word-break: normal;
+  overflow-wrap: break-word;
+  min-width: 0;
+}
 .term-line .prompt { color: var(--accent); }
 .term-line .comment { color: var(--fg-meta); }
 .term-line .str { color: #ffb86c; }
