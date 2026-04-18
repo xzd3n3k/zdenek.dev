@@ -115,6 +115,9 @@ html.fx-off .bg-grid { display: none; }
   background: color-mix(in oklch, var(--accent) 8%, transparent);
 }
 @media (pointer: coarse) { .cursor-dot, .cursor-ring { display: none; } }
+html.cursor-off body { cursor: auto; }
+html.cursor-off button { cursor: pointer; }
+html.cursor-off .cursor-dot, html.cursor-off .cursor-ring { display: none; }
 
 /* ---------- Layout ---------- */
 .container {

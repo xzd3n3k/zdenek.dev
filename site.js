@@ -98,6 +98,10 @@ const translations = {
     "tweaks.accent": "Accent",
     "tweaks.lang": "Language",
     "tweaks.trigger": "TWEAKS",
+    "tweaks.cursor": "Cursor",
+    "tweaks.cursor.custom": "Custom",
+    "tweaks.cursor.fast": "Fast",
+    "tweaks.cursor.default": "Default",
     "proj.view": "view project",
   },
   cs: {
@@ -178,6 +182,10 @@ const translations = {
     "tweaks.accent": "Akcent",
     "tweaks.lang": "Jazyk",
     "tweaks.trigger": "NASTAVENÍ",
+    "tweaks.cursor": "Kurzor",
+    "tweaks.cursor.custom": "Vlastní",
+    "tweaks.cursor.fast": "Rychlý",
+    "tweaks.cursor.default": "Výchozí",
     "proj.view": "zobrazit projekt",
   },
 };
@@ -247,6 +255,7 @@ function updateFavicon(accentColor) {
 function applyTweaks() {
   document.documentElement.classList.toggle("light", tweaks.theme === "light");
   document.documentElement.classList.toggle("fx-off", tweaks.fx === "off");
+  document.documentElement.classList.toggle("cursor-off", tweaks.cursor === "default");
   const a = ACCENTS[tweaks.accent] || ACCENTS.cyan;
   document.documentElement.style.setProperty("--accent", a.accent);
   document.documentElement.style.setProperty("--accent-2", a.accent2);
@@ -299,8 +308,9 @@ addEventListener("mousemove", (e) => {
   dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
 });
 function animCursor() {
-  rx += (mx - rx) * 0.18;
-  ry += (my - ry) * 0.18;
+  const lerp = tweaks.cursor === "fast" ? 0.4 : 0.18;
+  rx += (mx - rx) * lerp;
+  ry += (my - ry) * lerp;
   ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
   requestAnimationFrame(animCursor);
 }
