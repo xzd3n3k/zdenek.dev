@@ -110,7 +110,7 @@ const translations = {
     "availability.prefix": "DOSTUPNÝ",
     "hero.online": "ONLINE",
     "hero.location": "PRAHA, CZ",
-    "hero.h1": `Tvořím <span class="accent">rychlé</span>,<br /> promyšlené <span class="strike">weby</span> <span>webové aplikace</span><br />.`,
+    "hero.h1": `Tvořím <span class="accent">rychlé</span>,<br /> promyšlené <span class="strike">weby</span> <span>webové aplikace</span>.`,
     "hero.intro": `<strong>Zdeněk Němec</strong> — softwarový vývojář zaměřený na webové aplikace, marketingové weby &amp; e-commerce. Dodávám komplexní řešení od návrhu databáze až po poslední pixel na frontendu.`,
     "btn.portfolio": "Zobrazit portfolio",
     "btn.project": "Začít projekt",
