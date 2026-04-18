@@ -120,11 +120,11 @@ setInterval(tickClock, 1000); tickClock();
 const termLines = [
   { t: `<span class="comment"># boot sequence initialized</span>` },
   { t: `<span class="prompt">$</span> whoami` },
-  { t: `zdenek_nemec <span class="comment">// software developer · prague, cz</span>` },
+  { t: `zdenek_nemec <span class="comment">// software developer · brno, cz</span>` },
   { t: `<span class="prompt">$</span> cat stack.json` },
   { t: `{` },
-  { t: `  <span class="str">"frontend"</span>: [<span class="str">"next.js"</span>, <span class="str">"react"</span>, <span class="str">"svelte"</span>, <span class="str">"vue"</span>],`, indent: 15 },
-  { t: `  <span class="str">"backend"</span>:  [<span class="str">"node"</span>, <span class="str">"laravel"</span>, <span class="str">"python"</span>],`, indent: 15 },
+  { t: `  <span class="str">"frontend"</span>: [<span class="str">"next.js"</span>, <span class="str">"react"</span>, <span class="str">"svelte"</span>, <span class="str">"vue.js"</span>, <span class="str">"angular"</span>],`, indent: 15 },
+  { t: `  <span class="str">"backend"</span>:  [<span class="str">"node"</span>, <span class="str">"laravel"</span>, <span class="str">"python"</span>, <span class="str">"java"</span>],`, indent: 15 },
   { t: `  <span class="str">"commerce"</span>: [<span class="str">"shopify"</span>, <span class="str">"stripe"</span>]`, indent: 15 },
   { t: `}` },
   { t: `<span class="prompt">$</span> <span class="kw">run</span> <span class="str">"./open_to_work.sh"</span>` },
@@ -175,24 +175,24 @@ const skills = {
   "frontend": [
     { n: "Next.js", l: 5 }, { n: "React", l: 5 }, { n: "TypeScript", l: 5 },
     { n: "Tailwind", l: 5 }, { n: "Svelte", l: 4 }, { n: "Vue.js", l: 4 },
-    { n: "Angular", l: 3 }, { n: "Astro", l: 4 }, { n: "HTML / CSS", l: 5 },
+    { n: "Angular", l: 5 }, { n: "HTML / CSS", l: 5 },
   ],
   "backend": [
-    { n: "Node.js", l: 5 }, { n: "Laravel", l: 5 }, { n: "Python", l: 4 },
-    { n: "Java", l: 3 }, { n: "C#", l: 3 }, { n: "C / C++", l: 3 },
-    { n: "REST / GraphQL", l: 5 }, { n: "WebSockets", l: 4 },
+    { n: "Node.js", l: 4 }, { n: "Laravel", l: 4 }, { n: "Python", l: 4 },
+    { n: "Java", l: 4 }, { n: "C#", l: 3 }, { n: "C / C++", l: 3 },
+    { n: "REST / GraphQL", l: 4 }, { n: "WebSockets", l: 4 },
   ],
   "data / infra": [
-    { n: "Postgres", l: 5 }, { n: "Supabase", l: 5 }, { n: "Firebase", l: 4 },
-    { n: "Redis", l: 4 }, { n: "Vercel", l: 5 }, { n: "Docker", l: 4 },
-    { n: "CI/CD", l: 4 },
+    { n: "Postgres", l: 4 }, { n: "Supabase", l: 5 }, { n: "Firebase", l: 5 },
+    { n: "Vercel", l: 5 }, { n: "Docker", l: 4 },
+    { n: "CI/CD", l: 3 },
   ],
   "commerce": [
-    { n: "Shopify", l: 5 }, { n: "Hydrogen", l: 4 }, { n: "Stripe", l: 5 },
+    { n: "Shopify", l: 4 }, { n: "Hydrogen", l: 4 }, { n: "Stripe", l: 4 },
     { n: "GoPay", l: 4 }, { n: "WooCommerce", l: 3 },
   ],
   "craft": [
-    { n: "Perf budgets", l: 5 }, { n: "Accessibility", l: 4 },
+    { n: "Perf budgets", l: 4 }, { n: "Accessibility", l: 4 },
     { n: "Motion design", l: 4 }, { n: "SEO", l: 4 }, { n: "Design systems", l: 4 },
   ],
 };
@@ -229,13 +229,13 @@ renderSkills();
 /* ---------- Portfolio ---------- */
 const projects = [
   {
-    title: "Orbital Analytics",
-    type: "web app",
-    year: "2025",
+    title: "Nbeauty Care",
+    type: "business website",
+    year: "2026",
     wide: true,
-    desc: "Realtime analytics dashboard for a SaaS fleet-management platform. Sub-second query response across 40M rows with materialized views + edge caching.",
-    stack: ["Next.js", "TypeScript", "Supabase", "TimescaleDB", "Vercel"],
-    visual: "dashboard",
+    desc: "Info website for a beauty salon in OC Rozkvět, Brno. Next.js 16 App Router with Tailwind v4, 55 services across 9 categories, Framer Motion animations, and direct integration with the Reservio booking system.",
+    stack: ["Next.js 16", "React 19", "TypeScript", "Tailwind v4", "Framer Motion", "Vercel"],
+    visual: "site",
   },
   {
     title: "Halden Store",
