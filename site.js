@@ -36,7 +36,7 @@ const translations = {
     "btn.project": "Start a project",
     "clock.suffix": "LOCAL",
     "about.tag": "// 01 — about",
-    "about.title": "Ten years of<br />shipping the web.",
+    "about.title": "Four years of<br />shipping the web.",
     "about.lead": `I design and build the <em>full stack</em> — from Next.js frontends and Shopify storefronts to Node &amp; Laravel APIs and database schemas that actually scale.`,
     "about.body_1": "Self-taught, detail-obsessed, and pragmatic. I care about performance budgets, accessibility defaults, and shipping features that survive the first real week of traffic. No framework churn, no buzzword soup — just the right tool per problem.",
     "about.body_2": "I've built everything from small landing pages to multi-tenant SaaS dashboards and e-commerce platforms moving real money. I work with founders, agencies, and in-house teams as a solo contractor or embedded engineer.",
