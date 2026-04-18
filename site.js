@@ -212,8 +212,9 @@ function applyLanguage() {
   const avail = document.getElementById("availability");
   if (avail && typeof availabilityLabel === "function") avail.textContent = availabilityLabel();
   // re-render dynamically generated sections so translated content shows
-  if (typeof renderPortfolio === "function") renderPortfolio();
-  if (typeof renderTimeline === "function") renderTimeline();
+  // guard: only after initial render (projects/experience consts are not yet initialized on first applyTweaks call)
+  if (typeof renderPortfolio === "function" && document.querySelector("#portfolio .project")) renderPortfolio();
+  if (typeof renderTimeline === "function" && document.querySelector("#timeline .tl-row")) renderTimeline();
 }
 
 /* ---------- UTC offset for Europe/Prague (DST-aware) ---------- */
