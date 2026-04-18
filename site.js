@@ -12,7 +12,7 @@ const ACCENTS = {
 };
 const ACCENT_ORDER = ["cyan", "violet", "amber", "lime", "rose"];
 
-let tweaks = { ...(window.TWEAK_DEFAULTS || { theme: "dark", fx: "on", accent: "cyan", lang: "en", cursor: "enhanced", cursorSpeed: "default" }) };
+let tweaks = { ...(window.TWEAK_DEFAULTS || { theme: "dark", fx: "on", accent: "cyan", lang: "cs", cursor: "enhanced", cursorSpeed: "default" }) };
 try {
   const saved = JSON.parse(localStorage.getItem("tweaks") || "null");
   if (saved) tweaks = { ...tweaks, ...saved };
@@ -193,18 +193,18 @@ const translations = {
 };
 
 function tr(key) {
-  const lang = translations[tweaks.lang] ? tweaks.lang : "en";
+  const lang = translations[tweaks.lang] ? tweaks.lang : "cs";
   return translations[lang][key] ?? translations.en[key] ?? key;
 }
 
 function trField(obj, field) {
-  const lang = translations[tweaks.lang] ? tweaks.lang : "en";
+  const lang = translations[tweaks.lang] ? tweaks.lang : "cs";
   const locKey = `${field}_${lang}`;
   return (lang !== "en" && obj[locKey] !== undefined) ? obj[locKey] : obj[field];
 }
 
 function applyLanguage() {
-  const lang = translations[tweaks.lang] ? tweaks.lang : "en";
+  const lang = translations[tweaks.lang] ? tweaks.lang : "cs";
   document.documentElement.lang = lang;
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const val = tr(el.getAttribute("data-i18n"));
@@ -831,7 +831,7 @@ const experience = [
 ];
 
 function renderTimeline() {
-  const lang = translations[tweaks.lang] ? tweaks.lang : "en";
+  const lang = translations[tweaks.lang] ? tweaks.lang : "cs";
   const wrap = document.getElementById("timeline");
   wrap.innerHTML = experience.map(e => {
     const bullets = (lang !== "en" && e.bullets_cs) ? e.bullets_cs : e.bullets;
