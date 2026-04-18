@@ -283,6 +283,11 @@ section { padding: 120px 0; position: relative; }
   overflow-wrap: break-word;
   min-width: 0;
 }
+/* Hanging indent pro JSON-like řádky — pokračování wrappu se zarovná za ': [' */
+.term-line.indent {
+  padding-left: var(--indent, 15ch);
+  text-indent: calc(var(--indent, 15ch) * -1);
+}
 .term-line .prompt { color: var(--accent); }
 .term-line .comment { color: var(--fg-meta); }
 .term-line .str { color: #ffb86c; }

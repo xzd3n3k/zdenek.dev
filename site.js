@@ -123,9 +123,9 @@ const termLines = [
   { t: `zdenek_nemec <span class="comment">// software developer · prague, cz</span>` },
   { t: `<span class="prompt">$</span> cat stack.json` },
   { t: `{` },
-  { t: `  <span class="str">"frontend"</span>: [<span class="str">"next.js"</span>, <span class="str">"react"</span>, <span class="str">"svelte"</span>, <span class="str">"vue"</span>],` },
-  { t: `  <span class="str">"backend"</span>:  [<span class="str">"node"</span>, <span class="str">"laravel"</span>, <span class="str">"python"</span>],` },
-  { t: `  <span class="str">"commerce"</span>: [<span class="str">"shopify"</span>, <span class="str">"stripe"</span>]` },
+  { t: `  <span class="str">"frontend"</span>: [<span class="str">"next.js"</span>, <span class="str">"react"</span>, <span class="str">"svelte"</span>, <span class="str">"vue"</span>],`, indent: 15 },
+  { t: `  <span class="str">"backend"</span>:  [<span class="str">"node"</span>, <span class="str">"laravel"</span>, <span class="str">"python"</span>],`, indent: 15 },
+  { t: `  <span class="str">"commerce"</span>: [<span class="str">"shopify"</span>, <span class="str">"stripe"</span>]`, indent: 15 },
   { t: `}` },
   { t: `<span class="prompt">$</span> <span class="kw">run</span> <span class="str">"./open_to_work.sh"</span>` },
   { t: `<span class="comment">→ accepting new engagements for Q2–Q3 2026</span>`, final: true },
@@ -141,6 +141,10 @@ function runTerminal() {
     const line = termLines[li];
     const el = document.createElement("div");
     el.className = "term-line";
+    if (line.indent) {
+      el.classList.add("indent");
+      el.style.setProperty("--indent", `${line.indent}ch`);
+    }
     body.appendChild(el);
     // Strip HTML for char-by-char, but re-insert final HTML after.
     const tmp = document.createElement("div");
