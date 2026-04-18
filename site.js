@@ -12,11 +12,213 @@ const ACCENTS = {
 };
 const ACCENT_ORDER = ["cyan", "violet", "amber", "lime", "rose"];
 
-let tweaks = { ...(window.TWEAK_DEFAULTS || { theme: "dark", fx: "on", accent: "cyan" }) };
+let tweaks = { ...(window.TWEAK_DEFAULTS || { theme: "dark", fx: "on", accent: "cyan", lang: "en" }) };
 try {
   const saved = JSON.parse(localStorage.getItem("tweaks") || "null");
   if (saved) tweaks = { ...tweaks, ...saved };
 } catch(e) {}
+
+/* ---------- Translations ---------- */
+const translations = {
+  en: {
+    "nav.about": "// about",
+    "nav.stack": "// stack",
+    "nav.work": "// work",
+    "nav.services": "// services",
+    "nav.experience": "// experience",
+    "nav.contact": "// contact",
+    "availability.prefix": "AVAILABLE",
+    "hero.online": "ONLINE",
+    "hero.location": "PRAGUE, CZ",
+    "hero.h1": `Building <span class="accent">fast</span>,<br /> thoughtful <span class="strike">websites</span> <span>software</span><br /> for the modern web.`,
+    "hero.intro": `<strong>Zdeněk Němec</strong> — software developer focused on web apps, marketing sites &amp; e-commerce. I ship production-grade systems end-to-end, from database schema to the last pixel.`,
+    "btn.portfolio": "View portfolio",
+    "btn.project": "Start a project",
+    "clock.suffix": "LOCAL",
+    "about.tag": "// 01 — about",
+    "about.title": "Ten years of<br />shipping the web.",
+    "about.lead": `I design and build the <em>full stack</em> — from Next.js frontends and Shopify storefronts to Node &amp; Laravel APIs and database schemas that actually scale.`,
+    "about.body_1": "Self-taught, detail-obsessed, and pragmatic. I care about performance budgets, accessibility defaults, and shipping features that survive the first real week of traffic. No framework churn, no buzzword soup — just the right tool per problem.",
+    "about.body_2": "I've built everything from small landing pages to multi-tenant SaaS dashboards and e-commerce platforms moving real money. I work with founders, agencies, and in-house teams as a solo contractor or embedded engineer.",
+    "stat.1.k": "Years shipping",
+    "stat.1.meta": "since 2022",
+    "stat.2.k": "Projects delivered",
+    "stat.2.meta": "commercial &amp; internal",
+    "stat.3.k": "Production stacks",
+    "stat.3.meta": "languages + frameworks",
+    "stat.4.k": "Uptime, flagship",
+    "stat.4.meta": "rolling 12mo",
+    "skills.tag": "// 02 — stack",
+    "skills.title": "Tooling,<br />categorized.",
+    "work.tag": "// 03 — selected work",
+    "work.title": "Recent<br />projects.",
+    "services.tag": "// 04 — services",
+    "services.title": "How I<br />can help.",
+    "service.1.title": "Web applications",
+    "service.1.desc": "Full-stack SaaS, dashboards, internal tools. Auth, billing, realtime, background jobs — wired end-to-end.",
+    "service.2.title": "Marketing sites",
+    "service.2.desc": "Fast, CMS-driven sites that score 100 on Lighthouse and actually convert. SEO done properly.",
+    "service.3.title": "E-commerce",
+    "service.3.desc": "Shopify Plus storefronts, custom checkouts, or from-scratch e-shops with payment + fulfilment integrations.",
+    "experience.tag": "// 05 — experience",
+    "experience.title": "Work<br />history.",
+    "contact.tag": "// 06 — contact",
+    "contact.title": "Let's build<br />something.",
+    "contact.lead": `Have a project in mind? I'm currently taking on <em>new engagements</em>. Short consults, fixed-scope builds, or embedded retainers.`,
+    "contact.k.email": "Email",
+    "contact.k.github": "GitHub",
+    "contact.k.linkedin": "LinkedIn",
+    "contact.k.based": "Based in",
+    "contact.v.based": "Brno, Czech Republic",
+    "contact.k.working": "Working",
+    "contact.v.working": "Remote · EU / US hours",
+    "form.name": "Name",
+    "form.name_ph": "John Doe",
+    "form.email": "Email",
+    "form.email_ph": "johndoe@gmail.com",
+    "form.type": "Project type",
+    "form.opt.web": "Web application",
+    "form.opt.marketing": "Marketing site",
+    "form.opt.ecomm": "E-commerce",
+    "form.opt.design": "Design & Graphics",
+    "form.opt.updates": "Updates & Ongoing support",
+    "form.opt.other": "Something else",
+    "form.brief": "Brief",
+    "form.brief_ph": "a few lines about scope, timeline, stack...",
+    "form.submit": "Transmit",
+    "form.sent": "// message transmitted — I'll reply within 24h.",
+    "footer.crafted": "Crafted with care in Brno",
+    "tweaks.title": "// Tweaks",
+    "tweaks.theme": "Theme",
+    "tweaks.theme.dark": "Dark",
+    "tweaks.theme.light": "Light",
+    "tweaks.fx": "Background FX",
+    "tweaks.fx.on": "On",
+    "tweaks.fx.off": "Off",
+    "tweaks.accent": "Accent",
+    "tweaks.lang": "Language",
+    "tweaks.trigger": "TWEAKS",
+    "proj.view": "view project",
+  },
+  cs: {
+    "nav.about": "// o mně",
+    "nav.stack": "// stack",
+    "nav.work": "// projekty",
+    "nav.services": "// služby",
+    "nav.experience": "// zkušenosti",
+    "nav.contact": "// kontakt",
+    "availability.prefix": "DOSTUPNÝ",
+    "hero.online": "ONLINE",
+    "hero.location": "PRAHA, CZ",
+    "hero.h1": `Stavím <span class="accent">rychlý</span>,<br /> promyšlený <span class="strike">weby</span> <span>software</span><br /> pro moderní web.`,
+    "hero.intro": `<strong>Zdeněk Němec</strong> — softwarový vývojář zaměřený na webové aplikace, marketingové weby &amp; e-commerce. Dodávám produkční systémy od databázového schématu až po poslední pixel.`,
+    "btn.portfolio": "Zobrazit portfolio",
+    "btn.project": "Začít projekt",
+    "clock.suffix": "MÍSTNÍ",
+    "about.tag": "// 01 — o mně",
+    "about.title": "Roky vývoje<br />pro web.",
+    "about.lead": `Navrhuji a vyvíjím <em>celý stack</em> — od Next.js frontendů a Shopify storefrontů přes Node a Laravel API až po databázová schémata, která reálně škálují.`,
+    "about.body_1": "Samouk, detailista, pragmatik. Dbám na výkonnostní rozpočty, dostupnost a dodávání funkcí, které přežijí první týden reálného provozu. Žádné zbytečné přepisování frameworků, žádné buzzwordy — správný nástroj pro daný problém.",
+    "about.body_2": "Stavěl jsem všechno od malých landing pages po multi-tenant SaaS dashboardy a e-commerce platformy pracující s reálnými penězi. Pracuji s foundery, agenturami a interními týmy jako solo dodavatel nebo embedded inženýr.",
+    "stat.1.k": "Let vývoje",
+    "stat.1.meta": "od roku 2022",
+    "stat.2.k": "Dodaných projektů",
+    "stat.2.meta": "komerční &amp; interní",
+    "stat.3.k": "Produkčních stacků",
+    "stat.3.meta": "jazyky + frameworky",
+    "stat.4.k": "Dostupnost",
+    "stat.4.meta": "posledních 12 měsíců",
+    "skills.tag": "// 02 — stack",
+    "skills.title": "Nástroje,<br />podle kategorií.",
+    "work.tag": "// 03 — vybrané projekty",
+    "work.title": "Nedávné<br />projekty.",
+    "services.tag": "// 04 — služby",
+    "services.title": "Jak vám<br />můžu pomoct.",
+    "service.1.title": "Webové aplikace",
+    "service.1.desc": "Full-stack SaaS, dashboardy, interní nástroje. Autentizace, platby, realtime, background úlohy — vše propojené.",
+    "service.2.title": "Marketingové weby",
+    "service.2.desc": "Rychlé weby s CMS, které mají 100 v Lighthouse a skutečně konvertují. SEO dělané správně.",
+    "service.3.title": "E-commerce",
+    "service.3.desc": "Shopify Plus storefronty, custom checkouty, nebo e-shopy od nuly s integracemi plateb a logistiky.",
+    "experience.tag": "// 05 — zkušenosti",
+    "experience.title": "Pracovní<br />historie.",
+    "contact.tag": "// 06 — kontakt",
+    "contact.title": "Pojďme něco<br />postavit.",
+    "contact.lead": `Máte v hlavě projekt? Právě beru <em>nové zakázky</em>. Krátké konzultace, projekty s fixním rozsahem nebo embedded retainer.`,
+    "contact.k.email": "Email",
+    "contact.k.github": "GitHub",
+    "contact.k.linkedin": "LinkedIn",
+    "contact.k.based": "Sídlo",
+    "contact.v.based": "Brno, Česká republika",
+    "contact.k.working": "Pracuji",
+    "contact.v.working": "Vzdáleně · EU / US hodiny",
+    "form.name": "Jméno",
+    "form.name_ph": "Jan Novák",
+    "form.email": "Email",
+    "form.email_ph": "jannovak@gmail.com",
+    "form.type": "Typ projektu",
+    "form.opt.web": "Webová aplikace",
+    "form.opt.marketing": "Marketingový web",
+    "form.opt.ecomm": "E-commerce",
+    "form.opt.design": "Design & grafika",
+    "form.opt.updates": "Údržba & průběžná podpora",
+    "form.opt.other": "Něco jiného",
+    "form.brief": "Popis",
+    "form.brief_ph": "pár řádků o rozsahu, termínu, stacku...",
+    "form.submit": "Odeslat",
+    "form.sent": "// zpráva odeslána — odpovím do 24 hodin.",
+    "footer.crafted": "Vytvořeno s péčí v Brně",
+    "tweaks.title": "// Nastavení",
+    "tweaks.theme": "Motiv",
+    "tweaks.theme.dark": "Tmavý",
+    "tweaks.theme.light": "Světlý",
+    "tweaks.fx": "Pozadí FX",
+    "tweaks.fx.on": "Zapnuto",
+    "tweaks.fx.off": "Vypnuto",
+    "tweaks.accent": "Akcent",
+    "tweaks.lang": "Jazyk",
+    "tweaks.trigger": "NASTAVENÍ",
+    "proj.view": "zobrazit projekt",
+  },
+};
+
+function tr(key) {
+  const lang = translations[tweaks.lang] ? tweaks.lang : "en";
+  return translations[lang][key] ?? translations.en[key] ?? key;
+}
+
+function applyLanguage() {
+  const lang = translations[tweaks.lang] ? tweaks.lang : "en";
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const val = tr(el.getAttribute("data-i18n"));
+    if (val !== undefined) el.textContent = val;
+  });
+  document.querySelectorAll("[data-i18n-html]").forEach(el => {
+    const val = tr(el.getAttribute("data-i18n-html"));
+    if (val !== undefined) el.innerHTML = val;
+  });
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+    const val = tr(el.getAttribute("data-i18n-placeholder"));
+    if (val !== undefined) el.placeholder = val;
+  });
+  // refresh dynamic labels (availability + UTC) tied to language
+  const avail = document.getElementById("availability");
+  if (avail && typeof availabilityLabel === "function") avail.textContent = availabilityLabel();
+}
+
+/* ---------- UTC offset for Europe/Prague (DST-aware) ---------- */
+function pragueOffset() {
+  try {
+    const parts = new Intl.DateTimeFormat("en-US", {
+      timeZone: "Europe/Prague",
+      timeZoneName: "shortOffset",
+    }).formatToParts(new Date());
+    const tz = parts.find(p => p.type === "timeZoneName");
+    if (tz && tz.value) return tz.value.replace("GMT", "UTC");
+  } catch {}
+  return "UTC+1";
+}
 
 function updateFavicon(accentColor) {
   const bg = tweaks.theme === "light" ? "#f5f4ef" : "#0a0a0f";
@@ -40,6 +242,7 @@ function applyTweaks() {
   document.documentElement.style.setProperty("--accent-2", a.accent2);
   document.documentElement.style.setProperty("--accent-glow", a.glow);
   updateFavicon(a.accent);
+  applyLanguage();
   localStorage.setItem("tweaks", JSON.stringify(tweaks));
 }
 applyTweaks();
@@ -49,7 +252,8 @@ function currentQuarter(d = new Date()) { return Math.floor(d.getMonth() / 3) + 
 function availabilityLabel(d = new Date()) {
   const q = currentQuarter(d);
   const yy = String(d.getFullYear()).slice(-2);
-  return `AVAILABLE Q${q} '${yy}`;
+  const prefix = tr("availability.prefix") || "AVAILABLE";
+  return `${prefix} Q${q} '${yy}`;
 }
 function engagementRange(d = new Date()) {
   const q = currentQuarter(d);
@@ -72,6 +276,8 @@ function buildStamp(d = new Date()) {
   if (build) build.textContent = `build ${buildStamp(d)}`;
   const year = document.getElementById("year");
   if (year) year.textContent = String(d.getFullYear());
+  const utc = document.getElementById("utc-offset");
+  if (utc) utc.textContent = pragueOffset();
 })();
 
 /* ---------- Custom cursor ---------- */
@@ -157,7 +363,8 @@ function tickClock() {
   const mm = String(d.getMinutes()).padStart(2,"0");
   const ss = String(d.getSeconds()).padStart(2,"0");
   const el = document.getElementById("clock");
-  if (el) el.textContent = `${hh}:${mm}:${ss} LOCAL`;
+  const suffix = tr("clock.suffix") || "LOCAL";
+  if (el) el.textContent = `${hh}:${mm}:${ss} ${suffix}`;
 }
 setInterval(tickClock, 1000); tickClock();
 
@@ -447,7 +654,7 @@ function renderPortfolio() {
           <span class="type">${p.type}</span>
           <span class="dot"></span>
           <span>${p.year}</span>
-          ${p.url ? `<span class="dot"></span><span>view project</span>` : ""}
+          ${p.url ? `<span class="dot"></span><span data-i18n="proj.view">view project</span>` : ""}
         </div>
         <div class="proj-title">${p.title}${p.url ? ` <span class="ext">↗</span>` : ""}</div>
         <p class="proj-desc">${p.desc}</p>
@@ -464,6 +671,7 @@ function renderPortfolio() {
   attachReveal();
 }
 renderPortfolio();
+applyLanguage(); // re-translate after portfolio renders (picks up dynamic [data-i18n] spans)
 
 /* ---------- 3D Tilt ---------- */
 function attachTilt() {
