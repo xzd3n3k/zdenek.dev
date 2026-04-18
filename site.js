@@ -18,6 +18,20 @@ try {
   if (saved) tweaks = { ...tweaks, ...saved };
 } catch(e) {}
 
+function updateFavicon(accentColor) {
+  const bg = tweaks.theme === "light" ? "#f5f4ef" : "#0a0a0f";
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='${bg}' rx='8'/><rect x='8' y='8' width='48' height='48' fill='none' stroke='${accentColor}' stroke-width='2' rx='2'/><text x='32' y='41' text-anchor='middle' font-family='ui-monospace,monospace' font-size='22' font-weight='600' fill='${accentColor}' letter-spacing='1'>ZN</text></svg>`;
+  const url = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+  let link = document.querySelector("link[rel='icon']");
+  if (!link) {
+    link = document.createElement("link");
+    link.rel = "icon";
+    document.head.appendChild(link);
+  }
+  link.type = "image/svg+xml";
+  link.href = url;
+}
+
 function applyTweaks() {
   document.documentElement.classList.toggle("light", tweaks.theme === "light");
   document.documentElement.classList.toggle("fx-off", tweaks.fx === "off");
@@ -25,9 +39,40 @@ function applyTweaks() {
   document.documentElement.style.setProperty("--accent", a.accent);
   document.documentElement.style.setProperty("--accent-2", a.accent2);
   document.documentElement.style.setProperty("--accent-glow", a.glow);
+  updateFavicon(a.accent);
   localStorage.setItem("tweaks", JSON.stringify(tweaks));
 }
 applyTweaks();
+
+/* ---------- Dynamic date labels ---------- */
+function currentQuarter(d = new Date()) { return Math.floor(d.getMonth() / 3) + 1; }
+function availabilityLabel(d = new Date()) {
+  const q = currentQuarter(d);
+  const yy = String(d.getFullYear()).slice(-2);
+  return `AVAILABLE Q${q} '${yy}`;
+}
+function engagementRange(d = new Date()) {
+  const q = currentQuarter(d);
+  const y = d.getFullYear();
+  if (q === 4) return `Q4 ${y} – Q1 ${y + 1}`;
+  return `Q${q}–Q${q + 1} ${y}`;
+}
+function buildStamp(d = new Date()) {
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const dd = String(d.getDate()).padStart(2, "0");
+  return `${yyyy}.${mm}.${dd}`;
+}
+
+(function initDynamicText() {
+  const d = new Date();
+  const avail = document.getElementById("availability");
+  if (avail) avail.textContent = availabilityLabel(d);
+  const build = document.getElementById("build");
+  if (build) build.textContent = `build ${buildStamp(d)}`;
+  const year = document.getElementById("year");
+  if (year) year.textContent = String(d.getFullYear());
+})();
 
 /* ---------- Custom cursor ---------- */
 const ring = document.getElementById("cursorRing");
@@ -128,7 +173,7 @@ const termLines = [
   { t: `  <span class="str">"commerce"</span>: [<span class="str">"shopify"</span>, <span class="str">"stripe"</span>]`, indent: 15 },
   { t: `}` },
   { t: `<span class="prompt">$</span> <span class="kw">run</span> <span class="str">"./open_to_work.sh"</span>` },
-  { t: `<span class="comment">→ accepting new engagements for Q2–Q3 2026</span>`, final: true },
+  { t: `<span class="comment">→ accepting new engagements for ${engagementRange()}</span>`, final: true },
 ];
 
 function runTerminal() {
@@ -319,14 +364,14 @@ function projVisual(kind) {
           <div class="f">▸ media/</div>
         </div>
         <div class="code">
-          <div class="ln"><span class="n">1</span><span><span class="kw">export</span> <span class="kw">const</span> <span class="fn">Hero</span> = () =&gt; (</div></div>
-          <div class="ln"><span class="n">2</span><span>  &lt;<span class="fn">Section</span> tone=<span class="str">"dark"</span>&gt;</div></div>
-          <div class="ln"><span class="n">3</span><span>    &lt;<span class="fn">Headline</span>&gt;Build.&lt;/<span class="fn">Headline</span>&gt;</div></div>
-          <div class="ln"><span class="n">4</span><span>    &lt;<span class="fn">Cta</span> href=<span class="str">"/start"</span> /&gt;</div></div>
-          <div class="ln"><span class="n">5</span><span>  &lt;/<span class="fn">Section</span>&gt;</div></div>
-          <div class="ln"><span class="n">6</span><span>)</div></div>
+          <div class="ln"><span class="n">1</span><span><span class="kw">export</span> <span class="kw">const</span> <span class="fn">Hero</span> = () =&gt; (</span></div>
+          <div class="ln"><span class="n">2</span><span>  &lt;<span class="fn">Section</span> tone=<span class="str">"dark"</span>&gt;</span></div>
+          <div class="ln"><span class="n">3</span><span>    &lt;<span class="fn">Headline</span>&gt;Build.&lt;/<span class="fn">Headline</span>&gt;</span></div>
+          <div class="ln"><span class="n">4</span><span>    &lt;<span class="fn">Cta</span> href=<span class="str">"/start"</span> /&gt;</span></div>
+          <div class="ln"><span class="n">5</span><span>  &lt;/<span class="fn">Section</span>&gt;</span></div>
+          <div class="ln"><span class="n">6</span><span>)</span></div>
           <div class="ln"><span class="n">7</span><span></span></div>
-          <div class="ln"><span class="n">8</span><span><span class="kw">export</span> <span class="kw">default</span> <span class="fn">Hero</span></div></div>
+          <div class="ln"><span class="n">8</span><span><span class="kw">export</span> <span class="kw">default</span> <span class="fn">Hero</span></span></div>
         </div>
       </div>
     </div>`;
