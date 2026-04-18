@@ -459,49 +459,63 @@ function attachTilt() {
 /* ---------- Experience timeline ---------- */
 const experience = [
   {
-    years: "2023 — NOW",
+    years: "2026 — NOW",
+    role: "Frontend developer · hybrid",
+    org: "Legito s.r.o.",
+    bullets: [
+      "Developing and maintaining core UI features for a complex B2B document automation platform.",
+      "Translating high-fidelity Figma designs into responsive, accessible, and performant frontend components.",
+      "Contributing to the internal UI component library to ensure visual consistency across the SaaS application.",
+      "Collaborating with backend engineers and product teams to streamline data-heavy interfaces and user workflows.",
+    ],
+  },
+  {
+    years: "2024 — NOW",
     role: "Independent contractor",
     org: "zdenek.dev",
     bullets: [
       "Solo engineering for agencies & founders across EU and US.",
-      "Led builds of 3 SaaS dashboards, 2 Shopify Plus storefronts, and 6 marketing sites.",
-      "Introduced CI/CD + perf-budget pipelines cutting deploy time by 68%.",
+      "Led builds of 3 SaaS dashboards, 2 e-shops, and 6 marketing sites.",
+      "Owned the entire visual lifecycle, from initial Figma wireframes to pixel-perfect frontend code.",
+      "Redesigned critical user interfaces, focusing on accessibility, responsive layouts, and custom animations.",
     ],
   },
   {
-    years: "2021 — 2023",
-    role: "Senior full-stack engineer",
-    org: "Nordflow Studio · remote",
-    bullets: [
-      "Tech lead on a multi-tenant CMS serving 40+ client frontends.",
-      "Migrated flagship product from Vue 2 → Next.js 13 with zero downtime.",
-      "Mentored 4 junior devs; ran internal design-system working group.",
-    ],
-  },
-  {
-    years: "2019 — 2021",
-    role: "Full-stack developer",
-    org: "Kodefy s.r.o. · Prague",
-    bullets: [
-      "Shipped 30+ Laravel + Vue e-shops; integrated GoPay, ComGate, Stripe.",
-      "Built internal CLI generator reducing project bootstrap from 2d → 30min.",
-    ],
-  },
-  {
-    years: "2017 — 2019",
+    years: "2024 — 2026",
     role: "Frontend developer",
-    org: "Webhaus Agency · Brno",
+    org: "OKsystem · hybrid",
     bullets: [
-      "Delivered responsive WordPress / WooCommerce sites for SMB clients.",
-      "Introduced Sass + component workflow to the team.",
+      "Developed full-stack features for OKbase (enterprise HR system), bridging frontend UI with backend architecture.",
+      "Built and integrated REST APIs and modified backend services to support complex data flows and business logic.",
+      "Collaborated closely with system analysts, QA testers, and UX/UI designers to deliver robust, user-centric modules.",
     ],
   },
   {
-    years: "2016 — 2017",
-    role: "Junior developer",
-    org: "Freelance",
+    years: "2023 — 2024",
+    role: "Software developer",
+    org: "Aparatera s.r.o. · hybrid",
     bullets: [
-      "First paid web work while studying. HTML, CSS, PHP, jQuery.",
+      "Engineered a Java desktop application that automated flyer parsing, multi-currency price conversions, and marketing asset generation.",
+      "Developed a comprehensive internal management system for tracking inventory, tools, customers, and employee data.",
+    ],
+  },
+  {
+    years: "2022 — 2024",
+    role: "Frontend developer",
+    org: "EOS Digital · remote",
+    bullets: [
+      "Developed frontend features for a comprehensive SaaS platform used by sports clubs for member, finance, and communication management.",
+      "Implemented responsive, data-heavy dashboards and intuitive UI modules, optimizing the platform for thousands of active users.",
+    ],
+  },
+  {
+    years: "2022 — 2023",
+    role: "Software developer",
+    org: "Fakultní nemocnice Brno · hybrid",
+    bullets: [
+      "Introduced and established the SPFx React framework to modernize custom SharePoint application development across the hospital.",
+      "Built tailored medical and administrative apps using React (patient transport, food ordering, and internal registries).",
+      "Developed automated workflows and digital solutions utilizing PowerApps and Power Automate within the SharePoint ecosystem.",
     ],
   },
 ];
