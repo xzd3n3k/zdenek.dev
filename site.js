@@ -143,7 +143,7 @@ const translations = {
     "experience.tag": "// 05 — zkušenosti",
     "experience.title": "Pracovní<br />historie.",
     "contact.tag": "// 06 — kontakt",
-    "contact.title": "Pojďme něco<br />vytvořit.",
+    "contact.title": "Máte projekt?<br />Ozvěte se.",
     "contact.lead": `Máte nápad na projekt? Aktuálně nabírám <em>nové klienty</em>. Rád pomůžu s krátkou konzultací, uceleným projektem nebo i dlouhodobou spoluprací.`,
     "contact.k.email": "Email",
     "contact.k.github": "GitHub",
@@ -187,6 +187,12 @@ function tr(key) {
   return translations[lang][key] ?? translations.en[key] ?? key;
 }
 
+function trField(obj, field) {
+  const lang = translations[tweaks.lang] ? tweaks.lang : "en";
+  const locKey = `${field}_${lang}`;
+  return (lang !== "en" && obj[locKey] !== undefined) ? obj[locKey] : obj[field];
+}
+
 function applyLanguage() {
   const lang = translations[tweaks.lang] ? tweaks.lang : "en";
   document.documentElement.lang = lang;
@@ -205,6 +211,9 @@ function applyLanguage() {
   // refresh dynamic labels (availability + UTC) tied to language
   const avail = document.getElementById("availability");
   if (avail && typeof availabilityLabel === "function") avail.textContent = availabilityLabel();
+  // re-render dynamically generated sections so translated content shows
+  if (typeof renderPortfolio === "function") renderPortfolio();
+  if (typeof renderTimeline === "function") renderTimeline();
 }
 
 /* ---------- UTC offset for Europe/Prague (DST-aware) ---------- */
@@ -483,69 +492,85 @@ const projects = [
   {
     title: "Nbeauty Care",
     type: "business website",
+    type_cs: "informační web",
     year: "2026",
     wide: true,
     url: "https://www.nbeautycare.cz/",
     desc: "Info website for a beauty salon in OC Rozkvět, Brno. Next.js 16 App Router with Tailwind v4, 55 services across 9 categories, Framer Motion animations, and direct integration with the Reservio booking system.",
+    desc_cs: "Informační web pro beauty salon v OC Rozkvět v Brně. Next.js 16 App Router s Tailwind v4, 55 služeb napříč 9 kategoriemi, animace přes Framer Motion a přímá integrace rezervačního systému Reservio.",
     stack: ["Next.js 16", "React 19", "TypeScript", "Tailwind v4", "Framer Motion", "Vercel"],
     visual: "site",
   },
   {
     title: "PurityX",
     type: "e-shop",
+    type_cs: "e-shop",
     year: "2026",
     url: "https://its-time-shop.vercel.app",
     desc: "Custom Czech e-shop for an automotive cosmetics brand. Cart drawer, checkout with bank-transfer payments (SPD QR codes), order tracking page, and Resend-powered transactional emails — built end-to-end solo.",
+    desc_cs: "E-shop na míru pro českou značku autokosmetiky. Postranní košík, platby převodem se SPD QR kódem, sledování objednávky a transakční e-maily přes Resend — celý od nuly, sám.",
     stack: ["Next.js 16", "TypeScript", "Supabase", "Zustand", "Tailwind", "Resend"],
     visual: "shop",
   },
   {
     title: "PurityX Admin Panel",
     type: "dashboard",
+    type_cs: "administrace",
     year: "2026",
     desc: "Admin dashboard for the PurityX storefront. CRUD for products, categories, and orders with cookie-based auth, shop-settings management, and inline status controls for order fulfilment.",
+    desc_cs: "Admin panel pro PurityX e-shop. CRUD pro produkty, kategorie a objednávky, přihlašování přes cookies, správa nastavení obchodu a inline přepínání stavů expedice.",
     stack: ["Next.js 16", "TypeScript", "Supabase", "Tailwind", "Vercel"],
     visual: "dash",
   },
   {
     title: "It's Time",
     type: "business website",
+    type_cs: "firemní web",
     year: "2025",
     url: "https://itstime.cz/",
     desc: "Professional presentation website for an auto detailing studio. Features a service showcase, project gallery, and an integrated booking form.",
+    desc_cs: "Prezentační web pro auto detailing studio. Přehled služeb, galerie referencí a rezervační formulář.",
     stack: ["Svelte", "Python", "TypeScript", "Tailwind"],
     visual: "site",
   },
   {
     title: "Meta-Grid",
     type: "web app",
+    type_cs: "webová aplikace",
     year: "2025",
     desc: "Angular admin table for managing business records with live autocomplete from the Czech ARES registry. Firebase-backed persistence, authenticated access, and search across arbitrary columns.",
+    desc_cs: "Administrační tabulka v Angularu pro správu firemních záznamů s live autocompletem z českého registru ARES. Data ve Firebase, autentizace a fulltextové vyhledávání přes sloupce.",
     stack: ["Angular 20", "TypeScript", "Firebase", "ARES API"],
     visual: "dashboard",
   },
   {
     title: "Colorly",
     type: "design tool",
+    type_cs: "designový nástroj",
     year: "2025",
     url: "https://colorly.cloud/",
     desc: "React web app that generates primary, secondary, and semantic color palettes with perceptual-lightness correction — built for designers and devs maintaining consistent design systems.",
+    desc_cs: "React appka pro generování primárních, sekundárních a sémantických barevných palet s korekcí perceptuálního jasu — pro designéry a vývojáře, kteří drží konzistentní design systém.",
     stack: ["React", "TypeScript", "Tailwind", "CRA"],
     visual: "editor",
   },
   {
     title: "HTML Price Converter",
     type: "desktop utility",
+    type_cs: "desktopový nástroj",
     year: "2023",
     desc: "Java desktop GUI that parses uploaded HTML files and automatically converts Czech crown prices to EUR. Built to streamline localization for multi-currency online stores.",
+    desc_cs: "Java desktopová appka pro automatický převod korunových cen na EUR z nahraných HTML souborů. Zrychluje lokalizaci víceměnových e-shopů.",
     stack: ["Java", "Swing", "JSoup"],
     visual: "api",
   },
   {
     title: "Twitch Bot",
     type: "bot",
+    type_cs: "bot",
     year: "2022",
     desc: "Self-hosted Twitch bot that monitors stream status to automatically join live channels. It simulates viewer engagement with randomized chat messages and emojis, disconnecting once the stream ends.",
+    desc_cs: "Selfhostovaný Twitch bot, co hlídá stav streamů a sám naskočí, jakmile kanál začne vysílat. Hází náhodné zprávy a emoty jako normální divák — a zmizí hned, jak stream skončí.",
     stack: ["Typescript", "Twitch IRC", "WebSockets", "@twurple", "pino", "twitch-js", "worker-threads"],
     visual: "api",
   },
@@ -651,27 +676,26 @@ function renderPortfolio() {
       </div>
       <div class="proj-info">
         <div class="proj-meta">
-          <span class="type">${p.type}</span>
+          <span class="type">${trField(p, "type")}</span>
           <span class="dot"></span>
           <span>${p.year}</span>
-          ${p.url ? `<span class="dot"></span><span data-i18n="proj.view">view project</span>` : ""}
+          ${p.url ? `<span class="dot"></span><span>${tr("proj.view")}</span>` : ""}
         </div>
         <div class="proj-title">${p.title}${p.url ? ` <span class="ext">↗</span>` : ""}</div>
-        <p class="proj-desc">${p.desc}</p>
+        <p class="proj-desc">${trField(p, "desc")}</p>
         <div class="proj-stack">${p.stack.map(s => `<span>${s}</span>`).join("")}</div>
       </div>
     </article>
   `).join("");
-  wrap.addEventListener("click", (e) => {
-    const card = e.target.closest(".project.clickable[data-url]");
-    if (!card) return;
-    window.open(card.dataset.url, "_blank", "noopener,noreferrer");
-  });
   attachTilt();
   attachReveal();
 }
 renderPortfolio();
-applyLanguage(); // re-translate after portfolio renders (picks up dynamic [data-i18n] spans)
+document.getElementById("portfolio").addEventListener("click", (e) => {
+  const card = e.target.closest(".project.clickable[data-url]");
+  if (!card) return;
+  window.open(card.dataset.url, "_blank", "noopener,noreferrer");
+});
 
 /* ---------- 3D Tilt ---------- */
 function attachTilt() {
@@ -700,6 +724,12 @@ const experience = [
       "Contributing to the internal UI component library to ensure visual consistency across the SaaS application.",
       "Collaborating with backend engineers and product teams to streamline data-heavy interfaces and user workflows.",
     ],
+    bullets_cs: [
+      "Vývoj a údržba klíčových UI funkcí pro komplexní B2B platformu na automatizaci dokumentů.",
+      "Převod high-fidelity Figma návrhů do responzivních, přístupných a výkonných frontendových komponent.",
+      "Přispívám do interní UI komponentové knihovny, aby byl vizuální styl konzistentní napříč celou SaaS aplikací.",
+      "Spolupráce s backend inženýry a produktovým týmem na zjednodušení datově náročných rozhraní a uživatelských toků.",
+    ],
   },
   {
     years: "2024 — NOW",
@@ -711,6 +741,12 @@ const experience = [
       "Owned the entire visual lifecycle, from initial Figma wireframes to pixel-perfect frontend code.",
       "Redesigned critical user interfaces, focusing on accessibility, responsive layouts, and custom animations.",
     ],
+    bullets_cs: [
+      "Samostatný vývoj pro agentury a zakladatele firem po celé EU i USA.",
+      "Vedl buildy 3 SaaS dashboardů, 2 e-shopů a 6 marketingových webů.",
+      "Kompletní vizuální lifecycle — od prvních Figma skic po pixel-perfect frontend.",
+      "Redesign klíčových rozhraní se zaměřením na přístupnost, responzivitu a vlastní animace.",
+    ],
   },
   {
     years: "2024 — 2026",
@@ -721,6 +757,11 @@ const experience = [
       "Built and integrated REST APIs and modified backend services to support complex data flows and business logic.",
       "Collaborated closely with system analysts, QA testers, and UX/UI designers to deliver robust, user-centric modules.",
     ],
+    bullets_cs: [
+      "Full-stack rozvoj pro OKbase (enterprise HR systém) — propojení frontend UI s backend architekturou.",
+      "Tvorba a integrace REST API a úpravy backendových služeb pro komplexní datové toky a business logiku.",
+      "Úzká spolupráce se systémovými analytiky, QA testery a UX/UI designéry na robustních modulech.",
+    ],
   },
   {
     years: "2023 — 2024",
@@ -730,6 +771,10 @@ const experience = [
       "Engineered a Java desktop application that automated flyer parsing, multi-currency price conversions, and marketing asset generation.",
       "Developed a comprehensive internal management system for tracking inventory, tools, customers, and employee data.",
     ],
+    bullets_cs: [
+      "Napsal Java desktopovou appku pro automatické parsování letáků, převod měn a generování marketingových materiálů.",
+      "Vybudoval interní systém pro evidenci skladu, nástrojů, zákazníků a zaměstnanců.",
+    ],
   },
   {
     years: "2022 — 2024",
@@ -738,6 +783,10 @@ const experience = [
     bullets: [
       "Developed frontend features for a comprehensive SaaS platform used by sports clubs for member, finance, and communication management.",
       "Implemented responsive, data-heavy dashboards and intuitive UI modules, optimizing the platform for thousands of active users.",
+    ],
+    bullets_cs: [
+      "Vývoj frontendových funkcí pro SaaS platformu pro sportovní kluby — správa členů, financí a komunikace.",
+      "Implementace responzivních, datově náročných dashboardů a intuitivních UI modulů pro tisíce uživatelů.",
     ],
   },
   {
@@ -749,21 +798,30 @@ const experience = [
       "Built tailored medical and administrative apps using React (patient transport, food ordering, and internal registries).",
       "Developed automated workflows and digital solutions utilizing PowerApps and Power Automate within the SharePoint ecosystem.",
     ],
+    bullets_cs: [
+      "Zavedl SPFx React framework pro modernizaci vývoje vlastních SharePoint aplikací v nemocnici.",
+      "Vytvořil specializované zdravotnické a administrativní aplikace v Reactu (transport pacientů, objednávání jídla, interní registry).",
+      "Automatizované workflows a digitální řešení pomocí PowerApps a Power Automate v SharePoint prostředí.",
+    ],
   },
 ];
 
 function renderTimeline() {
+  const lang = translations[tweaks.lang] ? tweaks.lang : "en";
   const wrap = document.getElementById("timeline");
-  wrap.innerHTML = experience.map(e => `
+  wrap.innerHTML = experience.map(e => {
+    const bullets = (lang !== "en" && e.bullets_cs) ? e.bullets_cs : e.bullets;
+    return `
     <div class="tl-row">
       <div class="tl-years">${e.years}</div>
       <div class="tl-entry">
         <h3>${e.org}</h3>
         <div class="role">${e.role}</div>
-        <ul>${e.bullets.map(b => `<li>${b}</li>`).join("")}</ul>
+        <ul>${bullets.map(b => `<li>${b}</li>`).join("")}</ul>
       </div>
     </div>
-  `).join("");
+  `;
+  }).join("");
 }
 renderTimeline();
 
