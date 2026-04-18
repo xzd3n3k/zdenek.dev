@@ -493,10 +493,49 @@ attachReveal();
 
 /* ---------- Contact form ---------- */
 const form = document.getElementById("contactForm");
-form.addEventListener("submit", (e) => {
+const formBtn = form.querySelector('button[type="submit"]');
+const sentEl = form.querySelector('.sent');
+const defaultSentText = sentEl ? sentEl.textContent : '';
+
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  form.classList.add("sent");
-  setTimeout(() => form.classList.remove("sent"), 6000);
+  if (formBtn.disabled) return;
+
+  const data = {
+    name: form.name.value.trim(),
+    email: form.email.value.trim(),
+    type: form.type.value,
+    msg: form.msg.value.trim(),
+  };
+
+  const originalBtn = formBtn.innerHTML;
+  formBtn.disabled = true;
+  formBtn.innerHTML = 'Transmitting… <span class="arrow">→</span>';
+  form.classList.remove("sent", "error");
+
+  try {
+    const resp = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    const result = await resp.json().catch(() => ({}));
+    if (!resp.ok || !result.success) {
+      throw new Error(result.error || 'Transmission failed.');
+    }
+
+    if (sentEl) sentEl.textContent = defaultSentText;
+    form.classList.add("sent");
+    form.reset();
+    setTimeout(() => form.classList.remove("sent"), 6000);
+  } catch (err) {
+    if (sentEl) sentEl.textContent = `// error — ${err.message}`;
+    form.classList.add("sent", "error");
+    setTimeout(() => form.classList.remove("sent", "error"), 6000);
+  } finally {
+    formBtn.disabled = false;
+    formBtn.innerHTML = originalBtn;
+  }
 });
 
 /* ---------- Tweaks panel ---------- */
