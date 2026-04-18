@@ -254,10 +254,22 @@ function updateFavicon(accentColor) {
   link.href = url;
 }
 
+/* ---------- Cursor state (declared here so applyTweaks can reference them) ---------- */
+const ring = document.getElementById("cursorRing");
+const dot = document.getElementById("cursorDot");
+let mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my;
+let _cursorActive = false;
+
 function applyTweaks() {
   document.documentElement.classList.toggle("light", tweaks.theme === "light");
   document.documentElement.classList.toggle("fx-off", tweaks.fx === "off");
-  document.documentElement.classList.toggle("cursor-off", tweaks.cursor === "default");
+  document.documentElement.classList.toggle("cursor-off", tweaks.cursor !== "enhanced");
+  if (tweaks.cursor === "enhanced" && !_cursorActive) {
+    _cursorActive = true;
+    animCursor();
+  } else if (tweaks.cursor !== "enhanced") {
+    _cursorActive = false;
+  }
   const a = ACCENTS[tweaks.accent] || ACCENTS.cyan;
   document.documentElement.style.setProperty("--accent", a.accent);
   document.documentElement.style.setProperty("--accent-2", a.accent2);
@@ -302,21 +314,20 @@ function buildStamp(d = new Date()) {
 })();
 
 /* ---------- Custom cursor ---------- */
-const ring = document.getElementById("cursorRing");
-const dot = document.getElementById("cursorDot");
-let mx = innerWidth/2, my = innerHeight/2, rx = mx, ry = my;
 addEventListener("mousemove", (e) => {
   mx = e.clientX; my = e.clientY;
   dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
 });
 function animCursor() {
-  const lerp = tweaks.cursorSpeed === "fast" ? 1 : 0.18;
+  if (!_cursorActive) return;
+  const lerp = tweaks.cursorSpeed === "fast" ? 1 : 0.5;
   rx += (mx - rx) * lerp;
   ry += (my - ry) * lerp;
   ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
   requestAnimationFrame(animCursor);
 }
-animCursor();
+_cursorActive = tweaks.cursor === "enhanced";
+if (_cursorActive) animCursor();
 document.addEventListener("mouseover", (e) => {
   if (e.target.closest("[data-hover], a, button, input, textarea, select, .project")) {
     ring.classList.add("hover");
