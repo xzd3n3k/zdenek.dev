@@ -12,7 +12,7 @@ const ACCENTS = {
 };
 const ACCENT_ORDER = ["cyan", "violet", "amber", "lime", "rose"];
 
-let tweaks = { ...(window.TWEAK_DEFAULTS || { theme: "dark", fx: "on", accent: "cyan", lang: "en" }) };
+let tweaks = { ...(window.TWEAK_DEFAULTS || { theme: "dark", fx: "on", accent: "cyan", lang: "en", cursor: "enhanced", cursorSpeed: "default" }) };
 try {
   const saved = JSON.parse(localStorage.getItem("tweaks") || "null");
   if (saved) tweaks = { ...tweaks, ...saved };
@@ -99,7 +99,8 @@ const translations = {
     "tweaks.lang": "Language",
     "tweaks.trigger": "TWEAKS",
     "tweaks.cursor": "Cursor",
-    "tweaks.cursor.custom": "Custom",
+    "tweaks.cursor-speed": "Cursor speed",
+    "tweaks.cursor.enhanced": "Enhanced",
     "tweaks.cursor.fast": "Fast",
     "tweaks.cursor.default": "Default",
     "proj.view": "view project",
@@ -183,7 +184,8 @@ const translations = {
     "tweaks.lang": "Jazyk",
     "tweaks.trigger": "NASTAVENÍ",
     "tweaks.cursor": "Kurzor",
-    "tweaks.cursor.custom": "Vlastní",
+    "tweaks.cursor-speed": "Rychlost kurzoru",
+    "tweaks.cursor.enhanced": "Vylepšený",
     "tweaks.cursor.fast": "Rychlý",
     "tweaks.cursor.default": "Výchozí",
     "proj.view": "zobrazit projekt",
@@ -308,7 +310,7 @@ addEventListener("mousemove", (e) => {
   dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
 });
 function animCursor() {
-  const lerp = tweaks.cursor === "fast" ? 0.4 : 0.18;
+  const lerp = tweaks.cursorSpeed === "fast" ? 1 : 0.18;
   rx += (mx - rx) * lerp;
   ry += (my - ry) * lerp;
   ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;

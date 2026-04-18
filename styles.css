@@ -48,8 +48,8 @@ html, body {
   overflow-x: hidden;
 }
 
-body { cursor: none; }
-@media (pointer: coarse) { body { cursor: auto; } }
+body, a, input, textarea, select, label { cursor: none; }
+@media (pointer: coarse) { body, a, input, textarea, select, label { cursor: auto; } }
 
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: none; }
@@ -116,7 +116,10 @@ html.fx-off .bg-grid { display: none; }
 }
 @media (pointer: coarse) { .cursor-dot, .cursor-ring { display: none; } }
 html.cursor-off body { cursor: auto; }
-html.cursor-off button { cursor: pointer; }
+html.cursor-off a, html.cursor-off button { cursor: pointer; }
+html.cursor-off input, html.cursor-off textarea { cursor: text; }
+html.cursor-off select { cursor: default; }
+html.cursor-off label { cursor: default; }
 html.cursor-off .cursor-dot, html.cursor-off .cursor-ring { display: none; }
 
 /* ---------- Layout ---------- */
