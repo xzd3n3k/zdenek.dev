@@ -791,13 +791,14 @@ footer {
 .footer-inner {
   display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px;
 }
-.footer-socials { display: flex; gap: 20px; }
+.footer-socials { display: flex; gap: 10px; }
 .footer-socials a {
   color: var(--fg-dim);
-  padding: 8px 14px;
+  width: 34px; height: 34px;
+  display: flex; align-items: center; justify-content: center;
   border: 1px solid var(--line);
   transition: all .2s;
-  letter-spacing: 0.08em; text-transform: uppercase;
+  flex-shrink: 0;
 }
 .footer-socials a:hover {
   border-color: var(--accent);
