@@ -121,6 +121,7 @@ html.cursor-off input, html.cursor-off textarea { cursor: text; }
 html.cursor-off select { cursor: default; }
 html.cursor-off label { cursor: default; }
 html.cursor-off .cursor-dot, html.cursor-off .cursor-ring { display: none; }
+html.cursor-off .tweak-cursor-speed { display: none; }
 
 /* ---------- Layout ---------- */
 .container {
