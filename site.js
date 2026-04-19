@@ -2,6 +2,45 @@
    Personal website — zdenek.dev
    ========================================================= */
 
+let frameCount = 0;
+let lastTime = performance.now();
+const absoluteStartTime = performance.now();
+
+const checkInterval = 2000;
+const maxMeasureDuration = 10000;
+
+function checkPerformance(currentTime) {
+  if (currentTime - absoluteStartTime >= maxMeasureDuration) {
+    console.log("Měření FPS ukončeno: Uplynulo 10 vteřin a výkon je pro animace dostačující.");
+    return;
+  }
+
+  frameCount++;
+  let deltaTime = currentTime - lastTime;
+
+  if (deltaTime >= checkInterval) {
+    const fps = (frameCount * 1000) / deltaTime;
+
+    if (fps < 20) {
+      console.warn("Nízký výkon detekován:", Math.round(fps), "FPS. Vypínám animace.");
+      document.body.classList.add("low-perf");
+
+      tweaks.fx = 'off';
+      tweaks.cursor = 'default';
+      applyTweaks();
+      syncToggles();
+
+      return;
+    }
+
+    lastTime = currentTime;
+    frameCount = 0;
+  }
+
+  requestAnimationFrame(checkPerformance);
+}
+requestAnimationFrame(checkPerformance);
+
 /* ---------- Tweaks defaults (mirror of index.html block) ---------- */
 const ACCENTS = {
   cyan:   { accent: "#00ffd1", accent2: "#7c3aed", glow: "0 0 24px rgba(0,255,209,0.35)" },
