@@ -316,13 +316,13 @@ function buildStamp(d = new Date()) {
 /* ---------- Custom cursor ---------- */
 addEventListener("mousemove", (e) => {
   mx = e.clientX; my = e.clientY;
-  dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
 });
 function animCursor() {
   if (!_cursorActive) return;
   const lerp = tweaks.cursorSpeed === "fast" ? 1 : 0.5;
   rx += (mx - rx) * lerp;
   ry += (my - ry) * lerp;
+  dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
   ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
   requestAnimationFrame(animCursor);
 }
