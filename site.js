@@ -813,8 +813,8 @@ const experience = [
   },
   {
     years: "2024 — 2026",
-    role: "Frontend developer",
-    org: "OKsystem · hybrid",
+    role: "Frontend developer · hybrid",
+    org: "OKsystem",
     bullets: [
       "Developed full-stack features for OKbase (enterprise HR system), bridging frontend UI with backend architecture.",
       "Built and integrated REST APIs and modified backend services to support complex data flows and business logic.",
@@ -828,8 +828,8 @@ const experience = [
   },
   {
     years: "2023 — 2024",
-    role: "Software developer",
-    org: "Aparatera s.r.o. · hybrid",
+    role: "Software developer · hybrid",
+    org: "Aparatera s.r.o.",
     bullets: [
       "Engineered a Java desktop application that automated flyer parsing, multi-currency price conversions, and marketing asset generation.",
       "Developed a comprehensive internal management system for tracking inventory, tools, customers, and employee data.",
@@ -841,8 +841,8 @@ const experience = [
   },
   {
     years: "2022 — 2024",
-    role: "Frontend developer",
-    org: "EOS Digital · remote",
+    role: "Frontend developer · remote",
+    org: "EOS Digital",
     bullets: [
       "Developed frontend features for a comprehensive SaaS platform used by sports clubs for member, finance, and communication management.",
       "Implemented responsive, data-heavy dashboards and intuitive UI modules, optimizing the platform for thousands of active users.",
@@ -854,8 +854,8 @@ const experience = [
   },
   {
     years: "2022 — 2023",
-    role: "Software developer",
-    org: "Fakultní nemocnice Brno · hybrid",
+    role: "Software developer · hybrid",
+    org: "Fakultní nemocnice Brno",
     bullets: [
       "Introduced and established the SPFx React framework to modernize custom SharePoint application development across the hospital.",
       "Built tailored medical and administrative apps using React (patient transport, food ordering, and internal registries).",
