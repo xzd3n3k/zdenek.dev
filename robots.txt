@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://zdenek.dev/sitemap.xml
+Sitemap: https://zdenek-dev.cz/sitemap.xml
